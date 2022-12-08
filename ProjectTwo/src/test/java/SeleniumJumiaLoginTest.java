@@ -111,7 +111,7 @@ public class SeleniumJumiaLoginTest {
 
         // input valid email
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[2" +
-                "]/label/input")).sendKeys("dideoluwa11387@run.edu.ng");
+                "]/label/input")).sendKeys("*valid_email*");
         Thread.sleep(5000);
         // click continue button
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[3" +
@@ -170,7 +170,7 @@ public class SeleniumJumiaLoginTest {
     public void positiveLoginValidPassword() throws InterruptedException {
         // input valid password
         driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3]/label/input")).sendKeys(
-                "eight8Now");
+                "*valid_password*");
         Thread.sleep(4000);
 
         // click on login button
