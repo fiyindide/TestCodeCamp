@@ -52,14 +52,14 @@ public class SeleniumJumiaLoginTest {
             //fail
             System.out.println("wrong page title");
         }
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
 
     @Test (priority = 2)
     public void negativeLoginInvalidEmail() throws InterruptedException {
         // click on Account drop down
         driver.findElement(By.xpath("//*[@id=\"jm\"]/header/section/div[2]/div[1]/label")).click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         // click on signin button
         driver.findElement(By.xpath("//*[@id=\"dpdw-login-box\"]/div/div/a")).click();
         Thread.sleep(5000);
@@ -67,12 +67,17 @@ public class SeleniumJumiaLoginTest {
         // input invalid email
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[2" +
                 "]/label/input")).sendKeys("gmail.com");
-        Thread.sleep(3000);
+        Thread.sleep(5000);
+
+        // click continue button
+        driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[3" +
+                "]/div/button/span[3]")).click();
+        Thread.sleep(5000);
 
         // clear email input field
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[2" +
                 "]/label/input")).clear();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
     }
 
@@ -81,12 +86,23 @@ public class SeleniumJumiaLoginTest {
         // input blank email
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[2" +
                 "]/label/input")).sendKeys(" ");
-        Thread.sleep(4000);
+        Thread.sleep(5000);
+
+        // click continue button
+        driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[3" +
+                "]/div/button/span[3]")).click();
+        Thread.sleep(5000);
+
+        // assert empty email error message
+        String actualMessage = driver.findElement(By.id("empty-email-error" +
+                "-message")).getText();
+        assert (actualMessage.contains("Type your email to login"));
+        Thread.sleep(5000);
 
         // clear email input field
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[2" +
                 "]/label/input")).clear();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
     }
 
@@ -95,12 +111,12 @@ public class SeleniumJumiaLoginTest {
 
         // input valid email
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[2" +
-                "]/label/input")).sendKeys("*valid_email*");
-        Thread.sleep(3000);
+                "]/label/input")).sendKeys("dideoluwa11387@run.edu.ng");
+        Thread.sleep(5000);
         // click continue button
         driver.findElement(By.xpath("/html/body/div/div[4]/form/div[2]/div[3" +
                 "]/div/button/span[3]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
     }
 
@@ -109,28 +125,53 @@ public class SeleniumJumiaLoginTest {
         // input invalid password
         driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3]/label/input")).sendKeys(
                 "eight");
-        Thread.sleep(3000);
+        Thread.sleep(5000);
+
+        // click on login button
+        driver.findElement(By.xpath("//*[@id=\"loginButton\"]/span[3]")).click();
+        Thread.sleep(4000);
+
+        // asserts a text showing the password is invalid
+        String actualString = driver.findElement(By.xpath("//*[@id=\"passwordForm\"]" +
+                "/div[2]/div[3]/div/div")).getText();
+        assert (actualString.contains("Wrong password"));
+        Thread.sleep(4000);
+
         // clear password input field
         driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3" +
                 "]/label/input")).clear();
+        Thread.sleep(5000);
     }
 
     @Test (priority = 6)
     public void negativeLoginBlankPassword() throws InterruptedException {
         // input blank password
         driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3]/label/input")).sendKeys(
-                " ");
-        Thread.sleep(3000);
+                "");
+        Thread.sleep(5000);
+
+        // click on login button
+        driver.findElement(By.xpath("//*[@id=\"loginButton\"]/span[3]")).click();
+        Thread.sleep(4000);
+
+        // asserts a text showing the password is invalid
+        String actualString = driver.findElement(By.xpath("//*[@id=\"passwordForm\"]" +
+                "/div[2]/div[3]/div/div")).getText();
+        assert (actualString.contains("Wrong password"));
+        Thread.sleep(4000);
+
+        //clear the password input field
         driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3" +
                 "]/label/input")).clear();
+        Thread.sleep(5000);
     }
 
     @Test (priority = 7)
     public void positiveLoginValidPassword() throws InterruptedException {
         // input valid password
         driver.findElement(By.xpath("//*[@id=\"passwordForm\"]/div[2]/div[3]/label/input")).sendKeys(
-                "*valid_password*");
-        Thread.sleep(3000);
+                "eight8Now");
+        Thread.sleep(4000);
 
         // click on login button
         driver.findElement(By.xpath("//*[@id=\"loginButton\"]/span[3]")).click();
@@ -142,11 +183,11 @@ public class SeleniumJumiaLoginTest {
     public void logout() throws InterruptedException {
         // click on your username drop down
         driver.findElement(By.xpath("//*[@id=\"jm\"]/header/section/div[2]/div[1]/label")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
 
         // click on logout
         driver.findElement(By.xpath("//*[@id=\"dpdw-login-box\"]/div/form/button")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 
     @AfterTest
